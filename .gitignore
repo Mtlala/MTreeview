@@ -428,5 +428,5 @@ FodyWeavers.xsd
 *.msm
 *.msp
 
-# Test Files
-TestTreeview
+# Images
+icons/

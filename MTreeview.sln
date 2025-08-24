@@ -1,0 +1,31 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 17
+VisualStudioVersion = 17.14.36401.2
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "MTreeview", "MTreeview\MTreeview.vcxproj", "{EFE92903-B0BF-4AC3-B505-56E9A3332144}"
+EndProject
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "TestTreeview", "test\TestTreeview.vcxproj", "{DC81AFAA-5939-430B-AE05-B4FDEBA3276A}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|x64 = Debug|x64
+		Release|x64 = Release|x64
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{EFE92903-B0BF-4AC3-B505-56E9A3332144}.Debug|x64.ActiveCfg = Debug|x64
+		{EFE92903-B0BF-4AC3-B505-56E9A3332144}.Debug|x64.Build.0 = Debug|x64
+		{EFE92903-B0BF-4AC3-B505-56E9A3332144}.Release|x64.ActiveCfg = Release|x64
+		{EFE92903-B0BF-4AC3-B505-56E9A3332144}.Release|x64.Build.0 = Release|x64
+		{DC81AFAA-5939-430B-AE05-B4FDEBA3276A}.Debug|x64.ActiveCfg = Debug|x64
+		{DC81AFAA-5939-430B-AE05-B4FDEBA3276A}.Debug|x64.Build.0 = Debug|x64
+		{DC81AFAA-5939-430B-AE05-B4FDEBA3276A}.Release|x64.ActiveCfg = Release|x64
+		{DC81AFAA-5939-430B-AE05-B4FDEBA3276A}.Release|x64.Build.0 = Release|x64
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {39857331-5BAB-467F-B983-92A79C3F0A5F}
+	EndGlobalSection
+EndGlobal
