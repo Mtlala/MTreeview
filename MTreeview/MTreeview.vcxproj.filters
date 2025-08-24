@@ -20,7 +20,7 @@
     <Filter Include="Code Files\Utils">
       <UniqueIdentifier>{8bbb4a81-124e-44a3-8fa4-8995cfd2494e}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Code Files\Model">
+    <Filter Include="Code Files\Components">
       <UniqueIdentifier>{5853902b-e297-4222-be73-36ae33989d1c}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
@@ -30,6 +30,15 @@
     </ClInclude>
     <ClInclude Include="MTreeviewPrivate.h">
       <Filter>Code Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Utils\global_defs.h">
+      <Filter>Code Files\Utils</Filter>
+    </ClInclude>
+    <ClInclude Include="Utils\Trie.h">
+      <Filter>Code Files\Utils</Filter>
+    </ClInclude>
+    <ClInclude Include="Components\TrieTreeView.h">
+      <Filter>Code Files\Components</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -44,10 +53,24 @@
     <ClCompile Include="MTreeviewPrivate.cpp">
       <Filter>Code Files</Filter>
     </ClCompile>
+    <ClCompile Include="Utils\Trie.cpp">
+      <Filter>Code Files\Utils</Filter>
+    </ClCompile>
+    <ClCompile Include="Components\TrieModel.cpp">
+      <Filter>Code Files\Components</Filter>
+    </ClCompile>
+    <ClCompile Include="Components\TrieTreeView.cpp">
+      <Filter>Code Files\Components</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <QtRcc Include="icons.qrc">
       <Filter>Resource Files</Filter>
     </QtRcc>
+  </ItemGroup>
+  <ItemGroup>
+    <QtMoc Include="Components\TrieModel.h">
+      <Filter>Code Files\Components</Filter>
+    </QtMoc>
   </ItemGroup>
 </Project>
