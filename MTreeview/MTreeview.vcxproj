@@ -68,6 +68,7 @@
       <LanguageStandard>Default</LanguageStandard>
       <Optimization>Disabled</Optimization>
       <LanguageStandard_C>Default</LanguageStandard_C>
+      <AdditionalIncludeDirectories>$(SolutionDir)include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
     </ClCompile>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)' == 'Debug|x64'" Label="Configuration">
@@ -101,10 +102,17 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="Components\TrieModel.cpp" />
+    <ClCompile Include="Components\TrieTreeView.cpp" />
     <ClCompile Include="MTreeviewPrivate.cpp" />
+    <QtMoc Include="Components\TrieModel.h" />
+    <ClInclude Include="Components\TrieTreeView.h" />
     <ClInclude Include="MTreeview.h" />
     <ClCompile Include="MTreeview.cpp" />
     <ClInclude Include="MTreeviewPrivate.h" />
+    <ClInclude Include="Utils\global_defs.h" />
+    <ClInclude Include="Utils\QLinkedHash.hpp" />
+    <ClInclude Include="Utils\QLinkedTrie.hpp" />
   </ItemGroup>
   <ItemGroup>
     <QtUic Include="MTreeview.ui" />
