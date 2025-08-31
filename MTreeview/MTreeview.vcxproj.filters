@@ -34,11 +34,14 @@
     <ClInclude Include="Utils\global_defs.h">
       <Filter>Code Files\Utils</Filter>
     </ClInclude>
-    <ClInclude Include="Utils\Trie.h">
+    <ClInclude Include="Utils\QLinkedTrie.hpp">
       <Filter>Code Files\Utils</Filter>
     </ClInclude>
     <ClInclude Include="Components\TrieTreeView.h">
       <Filter>Code Files\Components</Filter>
+    </ClInclude>
+    <ClInclude Include="Utils\QLinkedHash.hpp">
+      <Filter>Code Files\Utils</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -52,9 +55,6 @@
     </ClCompile>
     <ClCompile Include="MTreeviewPrivate.cpp">
       <Filter>Code Files</Filter>
-    </ClCompile>
-    <ClCompile Include="Utils\Trie.cpp">
-      <Filter>Code Files\Utils</Filter>
     </ClCompile>
     <ClCompile Include="Components\TrieModel.cpp">
       <Filter>Code Files\Components</Filter>

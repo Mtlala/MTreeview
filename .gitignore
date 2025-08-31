@@ -428,5 +428,8 @@ FodyWeavers.xsd
 *.msm
 *.msp
 
+# Include Libraries
+include/
+
 # Images
 icons/
