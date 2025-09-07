@@ -43,6 +43,9 @@
     <ClInclude Include="Utils\QLinkedHash.hpp">
       <Filter>Code Files\Utils</Filter>
     </ClInclude>
+    <ClInclude Include="Components\TrieModel.h">
+      <Filter>Code Files\Components</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <QtUic Include="MTreeview.ui">
@@ -67,10 +70,5 @@
     <QtRcc Include="icons.qrc">
       <Filter>Resource Files</Filter>
     </QtRcc>
-  </ItemGroup>
-  <ItemGroup>
-    <QtMoc Include="Components\TrieModel.h">
-      <Filter>Code Files\Components</Filter>
-    </QtMoc>
   </ItemGroup>
 </Project>

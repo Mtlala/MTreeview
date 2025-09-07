@@ -4,37 +4,37 @@
 #include "Utils/QLinkedHash.hpp"
 
 #include <functional>
-#include <memory>
 
 #include <QStringList>
 
-template<typename T>
+template <typename T> class QLinkedTrie;
+
+template <typename T>
 class QLinkedTrieNode 
-    : std::enable_shared_from_this<QLinkedTrieNode>
 {
-    using Node = QLinkedTrieNode;
-
-    using NodePtr      = std::shared_ptr<Node>;
-    using NodePtrConst = std::shared_ptr<const Node>;
-
-	using NodeWPtr     = std::weak_ptr<Node>;
+    using Node  = QLinkedTrieNode;
 
 public:
     explicit QLinkedTrieNode(
-        const QString& name, const NodePtr& parent = nullptr)
-		: m_name(name), m_parent(parent) 
+        const QString& name, Node* parent = nullptr)
+		: m_name(name), m_parent(parent) {}
+    ~QLinkedTrieNode()
     {
-        shared_from_this();
+        for (auto& child : m_children)
+        {
+            delete child;
+			child = nullptr;
+		}
+		m_children.clear();
     }
-    ~QLinkedTrieNode() = default;
 
-    bool empty() const
-    { 
-        return m_children.empty(); 
-    }
     size_t size() const 
     { 
         return m_children.size(); 
+	}
+    bool empty() const
+    { 
+        return m_children.empty(); 
     }
 
     bool isEnd() const
@@ -42,11 +42,11 @@ public:
         return empty();
     }
 
-    NodePtr insert(const QString& name)
+    Node* insert(const QString& name)
     {
         if (!m_children.contains(name))
         {
-            m_children.append(name, std::make_shared<Node>(name, shared_from_this()));
+            m_children.append(name, new Node(name, this));
         }
         return m_children[name];
     }
@@ -59,40 +59,45 @@ public:
         return m_children.contains(name); 
     }
 
-    NodePtr getChild(const QString& name) const
+    Node* getChild(int idx) const
+    {
+        return idx >= 0 && idx < size() ? m_children[idx] : nullptr;
+    }
+
+    Node* getChild(const QString& name) const
     {
 		return m_children.contains(name) ? m_children[name] : nullptr;
     }
 
-    QList<NodePtr> getChildren() const { return m_children.toList(); }
+    QList<Node*> getChildren() const { return m_children.toList(); }
 
     QString prefix() const
     {
-        if (const auto& parent = m_parent.lock())
+        if (m_parent)
         {
-            return parent->prefix() + m_name;
+            return m_parent->prefix() + m_name;
         }
 		return m_name;
     }
 
-    NodePtr parent() const 
+    Node* parent() const
     {
-        return m_parent.lock(); 
+        return m_parent; 
     }
 
     int getRow() const
     {
-        if (const auto& parent = m_parent.lock())
+        if (m_parent)
         {
-            return parent->m_children.indexOf(m_name);
+            return m_parent->m_children.indexOf(m_name);
         }
         return 0;
     }
 
     void printInfo(QString& info) const
     {
-        std::function<QStringList(const NodePtrConst&, int)>
-            doPrintInfos = [&](const NodePtrConst& node, int depth)
+        std::function<QStringList(const Node*, int)>
+            doPrintInfos = [&](const Node* node, int depth)
         {
             QStringList infos;
             for (const auto& child : node->m_children.toList())
@@ -102,41 +107,41 @@ public:
 			}
 			return infos;
         };
-        info = doPrintInfos(shared_from_this(), 0).join('\n');
+        info = doPrintInfos(this, 0).join('\n');
     }
 
-	T& data() 
-    { 
-        return m_data; 
-    }
+	T& data() { return m_data; }
 
 private:
-    friend class QLinkedTrie;
+    template <typename T> friend class QLinkedTrie;
 
     QString m_name;
 
-    NodeWPtr m_parent;
-    QLinkedHash<QString, NodePtr> m_children;
+    Node* m_parent;
+    QLinkedHash<QString, Node*> m_children;
 
-    T m_data;
+	T m_data;
 };
 
-template<typename T>
+template <typename T>
 class QLinkedTrie
 {
-    using Node    = QLinkedTrieNode<T>;
-    using NodePtr = QLinkedTrieNode<T>::NodePtr;
+    using Node = QLinkedTrieNode<T>;
 
 public:
     QLinkedTrie(QChar spiliter = '.')
-        : m_spiliter(spiliter), m_root(std::make_shared<Node>("")) {}
-	~QLinkedTrie() = default;
+        : m_spiliter(spiliter), m_root(new Node("")) {}
+    ~QLinkedTrie() 
+    { 
+        delete m_root;
+        m_root = nullptr;
+    }
 
     void insert(const QString& word, const T& data)
     {
 		const auto& parts = word.split(m_spiliter);
 
-        NodePtr cur = m_root;
+        Node* cur = m_root;
         for (const auto& part : parts)
         {
             cur = cur->insert(part);
@@ -179,45 +184,45 @@ public:
     }
    
 	// find the node corresponding to the given prefix
-    NodePtr findNode(const QString& prefix) const
+    Node* findNode(const QString& prefix) const
     {
-        NodePtr curNode = m_root;
+        Node* cur = m_root;
         const auto& parts = prefix.split(m_spiliter);
 
         for (const auto& part : parts)
         {
-            curNode = curNode->getChild(part);
+            cur = cur->getChild(part);
             // return if the prefix does not exist
-            if (!curNode)
+            if (!cur)
             {
                 return nullptr;
             }
         }
-        return curNode;
+        return cur;
     }
 	// find the path of nodes corresponding to the given prefix
-    QList<NodePtr> findPath(const QString& prefix) const
+    QList<Node*> findPath(const QString& prefix) const
     {
-        NodePtr curNode = m_root;
+        Node* cur = m_root;
         const auto& parts = prefix.split(m_spiliter);
 
-        QList<NodePtr> path;
+        QList<Node*> path;
         for (const auto& part : parts)
         {
-            curNode = curNode->getChild(part);
+            cur = cur->getChild(part);
             // return if the prefix does not exist
-            if (!curNode)
+            if (!cur)
             {
                 return {};
             }
 
-            path.append(curNode);
+            path.append(cur);
         }
         return path;
     }
 
 	// get the root node
-    NodePtr getRoot() const { return m_root; }
+    Node* getRoot() const { return m_root; }
 
 	// traverse all words with the given prefix
     QStringList traverse(const QString& prefix = "") const
@@ -225,8 +230,8 @@ public:
 		auto startNode = findNode(prefix);
 
         QStringList words;
-        std::function<void(const NodePtr&, const QString&)> dfs =
-            [&](const NodePtr& node, const QString& cur)
+        std::function<void(const Node*, const QString&)> dfs =
+            [&](const Node* node, const QString& cur)
         {
             if (node->isEnd() && !cur.isEmpty())
             {
@@ -252,5 +257,5 @@ public:
 private:
     QChar m_spiliter;
 
-    NodePtr m_root;
+    Node* m_root;
 };

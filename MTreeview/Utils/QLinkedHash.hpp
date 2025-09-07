@@ -29,7 +29,7 @@ public:
 		: m_hash(other.m_hash), m_list(other.m_list) {}
 
 	/// Destructor
-	~QLinkedHash() { m_list.clear(); m_hash.clear(); }
+	~QLinkedHash() { clear(); }
 
 	/**************************************************************************************
 	 * 
@@ -40,7 +40,7 @@ public:
 	 * @return | <int> |the number of elements in the container.
 	 * 
 	 **************************************************************************************/
-	size_t size() const 
+	int size() const 
 	{ 
 		return m_list.size(); 
 	}
@@ -57,6 +57,17 @@ public:
 	bool empty() const
 	{
 		return m_list.isEmpty();
+	}
+
+	/**************************************************************************************
+	 *
+	 * @brief Clear all the elements in the container.
+	 *
+	 **************************************************************************************/
+	void clear()
+	{
+		m_list.clear(); 
+		m_hash.clear();
 	}
 
 	/**************************************************************************************

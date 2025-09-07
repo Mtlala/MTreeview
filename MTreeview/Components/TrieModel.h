@@ -1,18 +1,29 @@
 #pragma once
 
 #include <QAbstractItemModel>
-#include "Utils/trie.h"
+
+#include "Utils/QLinkedTrie.hpp"
+#include "roaring/roaring.hh"
 
 class TrieModel : public QAbstractItemModel
 {
-    Q_OBJECT
+private:
+    using RBitmap = roaring::Roaring;
+
+    struct Data
+    {
+        int type;
+        RBitmap bis;
+    };
+	using PData = std::shared_ptr<Data>;
+    using Node  = QLinkedTrieNode<PData>;
 
 public:
     explicit TrieModel(QObject* parent = nullptr);
     ~TrieModel();
 
     // QAbstractItemModel 接口实现
-    QModelIndex index(int row, int column, const QModelIndex& parent = QModelIndex()) const override;
+    virtual QModelIndex index(int row, int column, const QModelIndex& parent = QModelIndex()) const override;
     QModelIndex parent(const QModelIndex& index) const override;
     int rowCount(const QModelIndex& parent = QModelIndex()) const override;
     int columnCount(const QModelIndex& parent = QModelIndex()) const override;
@@ -22,9 +33,9 @@ public:
 
     // 自定义方法
     void insertWord(const QString& word);
-    void clear();
-    QStringList getAllWords() const;
+    //void clear();
+    //QStringList getAllWords() const;
 
 private:
-    Trie* m_trie;
+    QLinkedTrie<PData> m_trie;
 };
