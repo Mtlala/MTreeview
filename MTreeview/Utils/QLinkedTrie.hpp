@@ -42,6 +42,11 @@ public:
         return empty();
     }
 
+    QString name() const 
+    { 
+        return m_name; 
+	}
+
     Node* insert(const QString& name)
     {
         if (!m_children.contains(name))
