@@ -158,7 +158,7 @@
     </widget>
    </item>
    <item>
-    <widget class="QTreeView" name="treeview"/>
+    <widget class="HierarchicalTreeView" name="treeview"/>
    </item>
    <item>
     <widget class="QWidget" name="selectInfoWgt" native="true">
@@ -235,6 +235,13 @@
    </item>
   </layout>
  </widget>
+ <customwidgets>
+  <customwidget>
+   <class>HierarchicalTreeView</class>
+   <extends>QTreeView</extends>
+   <header>Components/HierarchicalTreeView.h</header>
+  </customwidget>
+ </customwidgets>
  <resources/>
  <connections/>
 </ui>

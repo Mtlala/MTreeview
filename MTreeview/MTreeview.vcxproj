@@ -102,11 +102,11 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <ClCompile Include="Components\TrieModel.cpp" />
-    <ClCompile Include="Components\TrieTreeView.cpp" />
+    <ClCompile Include="Components\HierarchicalModel.cpp" />
+    <ClCompile Include="Components\HierarchicalTreeView.cpp" />
     <ClCompile Include="MTreeviewPrivate.cpp" />
-    <QtMoc Include="Components\TrieModel.h" />
-    <ClInclude Include="Components\TrieTreeView.h" />
+    <ClInclude Include="Components\HierarchicalModel.h" />
+    <ClInclude Include="Components\HierarchicalTreeView.h" />
     <ClInclude Include="MTreeview.h" />
     <ClCompile Include="MTreeview.cpp" />
     <ClInclude Include="MTreeviewPrivate.h" />

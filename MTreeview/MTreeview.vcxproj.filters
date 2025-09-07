@@ -34,14 +34,17 @@
     <ClInclude Include="Utils\global_defs.h">
       <Filter>Code Files\Utils</Filter>
     </ClInclude>
+    <ClInclude Include="Utils\QLinkedHash.hpp">
+      <Filter>Code Files\Utils</Filter>
+    </ClInclude>
     <ClInclude Include="Utils\QLinkedTrie.hpp">
       <Filter>Code Files\Utils</Filter>
     </ClInclude>
-    <ClInclude Include="Components\TrieTreeView.h">
+    <ClInclude Include="Components\HierarchicalModel.h">
       <Filter>Code Files\Components</Filter>
     </ClInclude>
-    <ClInclude Include="Utils\QLinkedHash.hpp">
-      <Filter>Code Files\Utils</Filter>
+    <ClInclude Include="Components\HierarchicalTreeView.h">
+      <Filter>Code Files\Components</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -56,10 +59,10 @@
     <ClCompile Include="MTreeviewPrivate.cpp">
       <Filter>Code Files</Filter>
     </ClCompile>
-    <ClCompile Include="Components\TrieModel.cpp">
+    <ClCompile Include="Components\HierarchicalModel.cpp">
       <Filter>Code Files\Components</Filter>
     </ClCompile>
-    <ClCompile Include="Components\TrieTreeView.cpp">
+    <ClCompile Include="Components\HierarchicalTreeView.cpp">
       <Filter>Code Files\Components</Filter>
     </ClCompile>
   </ItemGroup>
@@ -67,10 +70,5 @@
     <QtRcc Include="icons.qrc">
       <Filter>Resource Files</Filter>
     </QtRcc>
-  </ItemGroup>
-  <ItemGroup>
-    <QtMoc Include="Components\TrieModel.h">
-      <Filter>Code Files\Components</Filter>
-    </QtMoc>
   </ItemGroup>
 </Project>
